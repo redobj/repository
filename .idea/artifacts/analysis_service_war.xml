@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="analysis-service:war">
+    <output-path>$PROJECT_DIR$/RepositoryControl/EnvironmentAnalysis/AnalysisService/target</output-path>
+    <root id="archive" name="analysis-service.war">
+      <element id="artifact" artifact-name="analysis-service:war exploded" />
+    </root>
+  </artifact>
+</component>

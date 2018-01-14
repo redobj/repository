@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Repository.iml" filepath="$PROJECT_DIR$/.idea/Repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RepositoryControl/EnvironmentAnalysis/AnalysisCore/analysis-core.iml" filepath="$PROJECT_DIR$/RepositoryControl/EnvironmentAnalysis/AnalysisCore/analysis-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RepositoryControl/EnvironmentAnalysis/AnalysisService/analysis-service.iml" filepath="$PROJECT_DIR$/RepositoryControl/EnvironmentAnalysis/AnalysisService/analysis-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CoreRoot/core-root.iml" filepath="$PROJECT_DIR$/CoreRoot/core-root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RepositoryControl/EnvironmentAnalysis/environment-analysis.iml" filepath="$PROJECT_DIR$/RepositoryControl/EnvironmentAnalysis/environment-analysis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RepositoryControl/repository-control.iml" filepath="$PROJECT_DIR$/RepositoryControl/repository-control.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServiceRoot/service-root.iml" filepath="$PROJECT_DIR$/ServiceRoot/service-root.iml" />
+    </modules>
+  </component>
+</project>
