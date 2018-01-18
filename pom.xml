@@ -6,12 +6,11 @@
 
     <groupId>com.redobj</groupId>
     <artifactId>repository</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>RepositoryControl</module>
-        <module>ServiceRoot</module>
-        <module>CoreRoot</module>
+        <module>RepositoryCore</module>
+        <module>RepositoryWeb</module>
     </modules>
-    <packaging>pom</packaging>
 
 </project>

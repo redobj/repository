@@ -6,18 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="analysis-core" />
-        <module name="analysis-service" />
+        <module name="repository-core" />
+        <module name="repository-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="analysis-core" target="1.5" />
-      <module name="analysis-service" target="1.5" />
-      <module name="core-root" target="1.5" />
-      <module name="environment-analysis" target="1.5" />
-      <module name="Repository" target="1.5" />
-      <module name="repository-control" target="1.5" />
-      <module name="service-root" target="1.5" />
+      <module name="repository" target="1.5" />
+      <module name="repository-core" target="1.5" />
+      <module name="repository-web" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
