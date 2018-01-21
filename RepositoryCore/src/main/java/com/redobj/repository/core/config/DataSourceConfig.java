@@ -35,6 +35,8 @@ public class DataSourceConfig {
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }
+        dataSource.setTestConnectionOnCheckin(false);
+        dataSource.setTestConnectionOnCheckout(true);
         dataSource.setUser(jdbcUser);
         dataSource.setPassword(jdbcPwd);
         return dataSource;
