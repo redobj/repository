@@ -10,9 +10,20 @@ import java.util.List;
 @Component
 public class ContainerService {
     @Autowired
-    ContainerMapper containerMapper;
+    private ContainerMapper containerMapper;
     @Autowired
-    EnvironmentService environmentService;
+    private EnvironmentService environmentService;
+
+    /**
+     * 检查货柜容量是否充足
+     * @param id 货柜id
+     * @param size 需要存入的货物
+     * @return 足够返回true
+     */
+    public boolean checkCapacity(int id, int size){
+        Container container = containerMapper.selectByPrimaryKey(id);
+        return (container.getContainerUsed()+size) < container.getContainerCapacity();
+    }
 
     public boolean addContainer(Container container){
         if(environmentService.checkEnv(container.getContainerEnvironment())){
@@ -39,6 +50,11 @@ public class ContainerService {
         return containerMapper.selectByPrimaryKeyWithEnv(id);
     }
 
+    public void enterGoods(int id,int size){
+        Container container = containerMapper.selectByPrimaryKey(id);
+        container.setContainerUsed(container.getContainerUsed()+size);
+        containerMapper.updateByPrimaryKey(container);
+    }
 
 
 }

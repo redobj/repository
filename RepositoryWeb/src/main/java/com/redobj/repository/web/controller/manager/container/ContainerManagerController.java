@@ -16,7 +16,7 @@ public class ContainerManagerController {
 
     /**
      * 访问所有 存储区域
-     * 测试url示例 ： 39.108.109.226/repository/manager/container/all
+     * 测试url示例 ： 39.108.109.226/repository-api/manager/container/all
      * @return
      */
     @ResponseBody
@@ -27,7 +27,7 @@ public class ContainerManagerController {
 
     /**
      * 访问所有 环境
-     * 测试url示例 ： 39.108.109.226/repository/manager/environments
+     * 测试url示例 ： 39.108.109.226/repository-api/manager/container/environments
      * @return
      */
     @ResponseBody
@@ -38,7 +38,7 @@ public class ContainerManagerController {
 
     /**
      * 增加一个存储区域
-     * 测试url示例 ： 39.108.109.226/repository/manager/add?
+     * 测试url示例 ： 39.108.109.226/repository-api/manager/container/add?
      *              containerName=测试区域2&containerUsed=0&containerCapacity=100&containerEnvironment=1
      * @param container
      * @return
@@ -51,7 +51,7 @@ public class ContainerManagerController {
 
     /**
      * 删除一个 存储区域
-     * 测试URL示例 ： 39.108.109.226/repository/manager/delete/1
+     * 测试URL示例 ： 39.108.109.226/repository-api/manager/container/delete/1
      * @param id
      * @return
      */
@@ -63,7 +63,7 @@ public class ContainerManagerController {
 
     /**
      * 修改一个 存储区域
-     * 测试URL示例： 39.108.109.226/repository/manager/update?
+     * 测试URL示例： 39.108.109.226/repository-api/manager/container/update?
      *             containerName=测试区域2&containerUsed=0&containerCapacity=100&containerEnvironment=1
      * @param container
      * @return
@@ -76,7 +76,7 @@ public class ContainerManagerController {
 
     /**
      * 根据ID获取一个 存储区域 信息
-     * 测试URL示例 ：39.108.109.226/repository/manager/get/1
+     * 测试URL示例 ：39.108.109.226/repository-api/manager/container/get/1
      * @param id
      * @return
      */

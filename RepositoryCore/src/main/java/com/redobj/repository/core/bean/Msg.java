@@ -12,11 +12,17 @@ public class Msg {
      * 错误码
      * 成功 ： 100
      * 错误 ： 200
+     * 已创建：101
+     * 已更改：102
      * 找不到要访问的信息： 404
+     * 容量不足：501
      */
     public static int MSG_SUCCESS = 100;
+    public static int MSG_CREATE = 101;
+    public static int MSG_UPDATE = 102;
     public static int MSG_FAIL = 200;
     public static int MSG_NOTFOUND = 404;
+    public static int MSG_OUTOFSIZE = 501;
 
     private int code;
     private String msg;
@@ -45,8 +51,9 @@ public class Msg {
         return code;
     }
 
-    public void setCode(int code) {
+    public Msg setCode(int code) {
         this.code = code;
+        return this;
     }
 
     public String getMsg() {
@@ -68,6 +75,5 @@ public class Msg {
     public  Msg add(String key, Object value){
         extend.put(key,value);
         return this;
-
     }
 }
