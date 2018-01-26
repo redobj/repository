@@ -1,8 +1,9 @@
 package com.redobj.repository.web.controller.manager.container;
 
-import com.redobj.repository.core.bean.Container;
-import com.redobj.repository.core.bean.Msg;
-import com.redobj.repository.web.service.manager.container.ContainerManagerServiceWeb;
+import com.redobj.repository.web.bean.Container;
+import com.redobj.repository.web.bean.Msg;
+import com.redobj.repository.web.service.ContainerService;
+import com.redobj.repository.web.service.EnvironmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ContainerManagerController {
     @Autowired
-    private ContainerManagerServiceWeb serviceWeb;
+    private ContainerService containerService;
+    @Autowired
+    private EnvironmentService environmentService;
 
     /**
      * 访问所有 存储区域
@@ -22,7 +25,7 @@ public class ContainerManagerController {
     @ResponseBody
     @RequestMapping("/manager/container/all")
     public Msg allContainer(){
-        return serviceWeb.allContainer();
+        return containerService.allContainer();
     }
 
     /**
@@ -33,7 +36,7 @@ public class ContainerManagerController {
     @ResponseBody
     @RequestMapping("/manager/container/environments")
     public Msg allEnvironment(){
-        return serviceWeb.allEnvironment();
+        return environmentService.getAllEnvironment();
     }
 
     /**
@@ -46,7 +49,7 @@ public class ContainerManagerController {
     @ResponseBody
     @RequestMapping("/manager/container/add")
     public Msg addContainer(Container container){
-        return serviceWeb.addContainer(container);
+        return containerService.addContainer(container);
     }
 
     /**
@@ -58,7 +61,7 @@ public class ContainerManagerController {
     @ResponseBody
     @RequestMapping("/manager/container/delete/{id}")
     public Msg deleteContainer(@PathVariable("id")int id){
-        return serviceWeb.deleteContainer(id);
+        return containerService.deleteContainer(id);
     }
 
     /**
@@ -71,7 +74,7 @@ public class ContainerManagerController {
     @ResponseBody
     @RequestMapping("/manager/container/update")
     public Msg updateContainer(Container container){
-        return serviceWeb.updateContainer(container);
+        return containerService.updateContainer(container);
     }
 
     /**
@@ -83,6 +86,6 @@ public class ContainerManagerController {
     @ResponseBody
     @RequestMapping("/manager/container/get/{id}")
     public Msg containerById(@PathVariable("id") int id){
-        return serviceWeb.containerById(id);
+        return containerService.containerById(id);
     }
 }

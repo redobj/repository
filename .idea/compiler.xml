@@ -13,7 +13,7 @@
     <bytecodeTargetLevel>
       <module name="repository" target="1.5" />
       <module name="repository-core" target="1.8" />
-      <module name="repository-web" target="1.5" />
+      <module name="repository-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

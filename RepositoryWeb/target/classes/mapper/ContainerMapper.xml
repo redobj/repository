@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.redobj.repository.web.dao.ContainerMapper">
+    <resultMap id="BaseResultMap" type="com.redobj.repository.web.bean.Container">
+        <id column="container_id" property="containerId" jdbcType="INTEGER"/>
+        <result column="container_name" property="containerName" jdbcType="CHAR"/>
+        <result column="container_used" property="containerUsed" jdbcType="INTEGER"/>
+        <result column="container_capacity" property="containerCapacity" jdbcType="INTEGER"/>
+        <result column="container_environment" property="containerEnvironment" jdbcType="INTEGER"/>
+        <result column="container_note" property="containerNote" jdbcType="VARCHAR"/>
+        <result column="tds" property="tds" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="WithEnvMap" type="com.redobj.repository.web.bean.Container">
+        <id column="container_id" property="containerId" jdbcType="INTEGER"/>
+        <result column="container_name" property="containerName" jdbcType="CHAR"/>
+        <result column="container_used" property="containerUsed" jdbcType="INTEGER"/>
+        <result column="container_capacity" property="containerCapacity" jdbcType="INTEGER"/>
+        <result column="container_environment" property="containerEnvironment" jdbcType="INTEGER"/>
+        <result column="container_note" property="containerNote" jdbcType="VARCHAR"/>
+        <result column="tds" property="tds" jdbcType="VARCHAR"/>
+        <association property="environment" javaType="com.redobj.repository.web.bean.Environment">
+            <result column="environment_name" property="environmentName" jdbcType="CHAR"/>
+            <result column="temperature" jdbcType="DOUBLE" property="temperature"/>
+            <result column="humidity" jdbcType="DOUBLE" property="humidity"/>
+            <result column="sun" jdbcType="DOUBLE" property="sun"/>
+        </association>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        container_id, container_name, container_used, container_capacity, container_environment,
+        container_note,tds
+    </sql>
+    <sql id="WithEnv_Column_List">
+    container_id,container_name,container_used,container_capacity,container_environment,container_note,tds,
+    environment_name,temperature,humidity,sun
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.redobj.repository.web.bean.ContainerExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from container
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from container
+        where container_id = #{containerId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByExampleWithEnv" resultMap="WithEnvMap"
+            parameterType="com.redobj.repository.web.bean.ContainerExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="WithEnv_Column_List"/>
+        from container left join environment on container.container_environment=environment.environment_id
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKeyWithEnv" resultMap="WithEnvMap" parameterType="java.lang.Integer">
+        select
+        <include refid="WithEnv_Column_List"/>
+        from container left join environment on container.container_environment=environment.environment_id
+        where container_id = #{containerId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from container
+        where container_id = #{containerId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.redobj.repository.web.bean.ContainerExample">
+        delete from container
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.redobj.repository.web.bean.Container">
+        insert into container (container_id, container_name, container_used,
+        container_capacity, container_environment,
+        container_note),tds
+        values (#{containerId,jdbcType=INTEGER}, #{containerName,jdbcType=CHAR}, #{containerUsed,jdbcType=INTEGER},
+        #{containerCapacity,jdbcType=INTEGER}, #{containerEnvironment,jdbcType=INTEGER},
+        #{containerNote,jdbcType=VARCHAR} , #{tds,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.redobj.repository.web.bean.Container">
+
+        insert into container
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="containerId != null">
+                container_id,
+            </if>
+            <if test="containerName != null">
+                container_name,
+            </if>
+            <if test="containerUsed != null">
+                container_used,
+            </if>
+            <if test="containerCapacity != null">
+                container_capacity,
+            </if>
+            <if test="containerEnvironment != null">
+                container_environment,
+            </if>
+            <if test="containerNote != null">
+                container_note,
+            </if>
+            <if test="tds != null">
+                tds,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="containerId != null">
+                #{containerId,jdbcType=INTEGER},
+            </if>
+            <if test="containerName != null">
+                #{containerName,jdbcType=CHAR},
+            </if>
+            <if test="containerUsed != null">
+                #{containerUsed,jdbcType=INTEGER},
+            </if>
+            <if test="containerCapacity != null">
+                #{containerCapacity,jdbcType=INTEGER},
+            </if>
+            <if test="containerEnvironment != null">
+                #{containerEnvironment,jdbcType=INTEGER},
+            </if>
+            <if test="containerNote != null">
+                #{containerNote,jdbcType=VARCHAR},
+            </if>
+            <if test="tds != null">
+                #{tds,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.redobj.repository.web.bean.ContainerExample"
+            resultType="java.lang.Integer">
+        select count(*) from container
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update container
+        <set>
+            <if test="record.containerId != null">
+                container_id = #{record.containerId,jdbcType=INTEGER},
+            </if>
+            <if test="record.containerName != null">
+                container_name = #{record.containerName,jdbcType=CHAR},
+            </if>
+            <if test="record.containerUsed != null">
+                container_used = #{record.containerUsed,jdbcType=INTEGER},
+            </if>
+            <if test="record.containerCapacity != null">
+                container_capacity = #{record.containerCapacity,jdbcType=INTEGER},
+            </if>
+            <if test="record.containerEnvironment != null">
+                container_environment = #{record.containerEnvironment,jdbcType=INTEGER},
+            </if>
+            <if test="record.containerNote != null">
+                container_note = #{record.containerNote,jdbcType=VARCHAR},
+            </if>
+            <if test="record.containerNote != null">
+                tds = #{record.tds,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 14:58:56 CST 2018.
+        -->
+        update container
+        set container_id = #{record.containerId,jdbcType=INTEGER},
+        container_name = #{record.containerName,jdbcType=CHAR},
+        container_used = #{record.containerUsed,jdbcType=INTEGER},
+        container_capacity = #{record.containerCapacity,jdbcType=INTEGER},
+        container_environment = #{record.containerEnvironment,jdbcType=INTEGER},
+        container_note = #{record.containerNote,jdbcType=VARCHAR},
+        tds = #{record.tds,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.redobj.repository.web.bean.Container">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 14:58:56 CST 2018.
+        -->
+        update container
+        <set>
+            <if test="containerName != null">
+                container_name = #{containerName,jdbcType=CHAR},
+            </if>
+            <if test="containerUsed != null">
+                container_used = #{containerUsed,jdbcType=INTEGER},
+            </if>
+            <if test="containerCapacity != null">
+                container_capacity = #{containerCapacity,jdbcType=INTEGER},
+            </if>
+            <if test="containerEnvironment != null">
+                container_environment = #{containerEnvironment,jdbcType=INTEGER},
+            </if>
+            <if test="containerNote != null">
+                container_note = #{containerNote,jdbcType=VARCHAR},
+            </if>
+            <if test="tds != null">
+                tds = #{tds,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where container_id = #{containerId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.redobj.repository.web.bean.Container">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Thu Jan 18 14:58:56 CST 2018.
+        -->
+        update container
+        set container_name = #{containerName,jdbcType=CHAR},
+        container_used = #{containerUsed,jdbcType=INTEGER},
+        container_capacity = #{containerCapacity,jdbcType=INTEGER},
+        container_environment = #{containerEnvironment,jdbcType=INTEGER},
+        container_note = #{containerNote,jdbcType=VARCHAR},
+        tds = #{tds,jdbcType=VARCHAR}
+        where container_id = #{containerId,jdbcType=INTEGER}
+    </update>
+</mapper>
